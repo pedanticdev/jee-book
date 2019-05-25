@@ -2,6 +2,7 @@ package cdi.producers;
 
 import cdi.annotations.UserNameQualifier;
 import cdi.beans.UserSession;
+import jpa.entities.ApplicationUser;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;

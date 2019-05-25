@@ -1,26 +1,49 @@
 package cdi.beans;
 
 
+import jpa.entities.ApplicationUser;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.Remove;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @SessionScoped
 public class UserSession implements Serializable {
 
-    private String userName;
+
     private LocalDateTime loggedInTime;
     private LocalDateTime loggedOutTime;
 
+    @Inject
+    private ApplicationUser currentUser;
+
+    @PostConstruct
+    private void init() {
+        //You should have your security layer instantiate the ApplicationUser upon a user
+        //Successfully authenticating herself. Below code is just for example purposes to prevent a NPE
+        currentUser.setAddress("Accra, Ghana");
+        currentUser.setEmail("hello@myDomain.com");
+        currentUser.setUserName("DJTrippp");
+        currentUser.setMobileNumber("+233123455678");
+
+    }
+
+    public ApplicationUser getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(ApplicationUser currentUser) {
+        this.currentUser = currentUser;
+    }
 
     public String getUserName() {
-        return userName;
+        return currentUser.getUserName();
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+
 
     public LocalDateTime getLoggedInTime() {
         return loggedInTime;
