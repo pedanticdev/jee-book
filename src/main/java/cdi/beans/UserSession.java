@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Remove;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
