@@ -1,15 +1,13 @@
 package cdi.beans;
 
-
-import jpa.entities.ApplicationUser;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.Remove;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+
+import jpa.entities.ApplicationUser;
 
 @SessionScoped
 public class UserSession implements Serializable {

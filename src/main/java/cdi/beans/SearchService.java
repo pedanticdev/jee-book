@@ -1,13 +1,13 @@
 package cdi.beans;
 
-import jpa.entities.Order;
-import service.QueryService;
+import java.util.Collection;
+import java.util.HashSet;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
+
+import jpa.entities.Order;
+import service.QueryService;
 
 @RequestScoped
 public class SearchService {

@@ -1,17 +1,15 @@
 package cdi.producers;
 
-import cdi.annotations.UserNameQualifier;
-import cdi.beans.UserSession;
-import jpa.entities.ApplicationUser;
+import java.util.logging.Logger;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.logging.Logger;
+
+import cdi.annotations.UserNameQualifier;
+import cdi.beans.UserSession;
 
 public class MyProducer {
 

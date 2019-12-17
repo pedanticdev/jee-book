@@ -1,11 +1,11 @@
 package cdi.beans;
 
-import misc.TableNum;
-
-import javax.enterprise.context.ApplicationScoped;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+
+import javax.enterprise.context.ApplicationScoped;
+
+import misc.TableNum;
 
 
 @ApplicationScoped

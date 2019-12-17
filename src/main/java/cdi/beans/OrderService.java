@@ -1,17 +1,16 @@
 package cdi.beans;
 
-import cdi.annotations.InStoreQualifier;
-import cdi.annotations.Logging;
-import jpa.entities.ApplicationUser;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-import javax.inject.Singleton;
-import java.io.Serializable;
-import java.math.BigDecimal;
+
+import cdi.annotations.InStoreQualifier;
+import cdi.annotations.Logging;
+import jpa.entities.ApplicationUser;
 
 @ConversationScoped
 @InStoreQualifier

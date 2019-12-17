@@ -1,61 +1,75 @@
 package cdi.beans;
 
-import cdi.annotations.OnlineQualifier;
-import jpa.entities.ApplicationUser;
-import jpa.entities.Order;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import cdi.annotations.OnlineQualifier;
+import jpa.entities.ApplicationUser;
+import jpa.entities.Order;
 
 @ConversationScoped
 @OnlineQualifier
 public class SelfService implements
-        GenericOrder, Serializable {
+		GenericOrder, Serializable {
 
-    @Inject
-    @OnlineQualifier
-    Event<ApplicationUser> messageEvent;
+	@Inject
+	@ConfigProperty(name = "self-service", defaultValue = "Hello, and welcome!")
+	private String selfServiceWelcome;
 
-    @Inject
-    UserSession userSession;
+	@Inject
+	@ConfigProperty(name = "dynamic-value")
+	private Provider<String> myDynamicValue;
 
-    List<Order> lastOrders = new ArrayList<>();
+	@Inject
+	@OnlineQualifier
+	Event<ApplicationUser> messageEvent;
 
-    @PostConstruct
-    private void init() {
-        //Populate list from DB
-    }
+	@Inject
+	UserSession userSession;
 
-    @Inject
-    Conversation conversation;
+	List<Order> lastOrders = new ArrayList<>();
 
-    public void beginOrderProcess() {
-        if (conversation.isTransient()) {
-            conversation.begin();
-        }
-    }
+	@PostConstruct
+	private void init() {
+		Logger.getAnonymousLogger().log(Level.INFO, myDynamicValue.get());
+		//Populate list from DB
+	}
 
-    @Override
-    public BigDecimal order() {
+	@Inject
+	Conversation conversation;
 
-        //fire a message event to send SMS before returning from this method
-//        messageEvent.fire(userSession.getCurrentUser());
-        messageEvent.fireAsync(userSession.getCurrentUser());
-        return null;
-    }
+	public void beginOrderProcess() {
+		if (conversation.isTransient()) {
+			conversation.begin();
+		}
+	}
 
-    public void endOrderProcess() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-    }
+	@Override
+	public BigDecimal order() {
+
+		//fire a message event to send SMS before returning from this method
+		//        messageEvent.fire(userSession.getCurrentUser());
+		messageEvent.fireAsync(userSession.getCurrentUser());
+		return null;
+	}
+
+	public void endOrderProcess() {
+		if (!conversation.isTransient()) {
+			conversation.end();
+		}
+	}
 
 }

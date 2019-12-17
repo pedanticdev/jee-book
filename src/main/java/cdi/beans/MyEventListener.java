@@ -1,13 +1,13 @@
 package cdi.beans;
 
+import javax.enterprise.event.Observes;
+import javax.enterprise.event.ObservesAsync;
+import javax.enterprise.event.TransactionPhase;
+
 import cdi.annotations.CreateUserQualifier;
 import cdi.annotations.InStoreQualifier;
 import cdi.annotations.OnlineQualifier;
 import jpa.entities.ApplicationUser;
-
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.ObservesAsync;
-import javax.enterprise.event.TransactionPhase;
 
 public class MyEventListener {
 

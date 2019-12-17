@@ -1,17 +1,15 @@
 package cdi.beans;
 
-
-import cdi.annotations.Logging;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.Priority;
-import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
-import javax.security.enterprise.authentication.mechanism.http.RememberMe;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import cdi.annotations.Logging;
 
 
 @Interceptor
