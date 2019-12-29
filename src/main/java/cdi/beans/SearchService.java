@@ -3,18 +3,18 @@ package cdi.beans;
 import java.util.Collection;
 import java.util.HashSet;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import jpa.entities.Order;
 import service.QueryService;
 
-@RequestScoped
+@ApplicationScoped
 public class SearchService {
 
     private final Collection<Order> searchResults = new HashSet<>();
 
-    QueryService queryService;
+    private QueryService queryService;
 
     @Inject
     public SearchService(QueryService qS) {
